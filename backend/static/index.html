@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PM Hello</title>
+    <style>
+      :root {
+        --accent-yellow: #ecad0a;
+        --primary-blue: #209dd7;
+        --purple-secondary: #753991;
+        --navy-dark: #032147;
+        --gray-text: #888888;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Georgia, "Times New Roman", serif;
+        color: var(--navy-dark);
+        background:
+          radial-gradient(circle at top left, rgba(32, 157, 215, 0.2), transparent 45%),
+          radial-gradient(circle at bottom right, rgba(117, 57, 145, 0.15), transparent 40%),
+          #f7fafc;
+        display: grid;
+        place-items: center;
+      }
+      main {
+        max-width: 32rem;
+        padding: 2rem;
+        text-align: center;
+      }
+      h1 {
+        margin: 0 0 0.75rem;
+        font-size: 2.5rem;
+      }
+      p {
+        color: var(--gray-text);
+        line-height: 1.5;
+      }
+      button {
+        margin-top: 1.5rem;
+        border: 0;
+        border-radius: 999px;
+        padding: 0.75rem 1.5rem;
+        background: var(--purple-secondary);
+        color: white;
+        font: inherit;
+        cursor: pointer;
+      }
+      #result {
+        margin-top: 1rem;
+        min-height: 1.5rem;
+        color: var(--primary-blue);
+        font-weight: 700;
+      }
+      .accent {
+        display: inline-block;
+        width: 3rem;
+        height: 0.25rem;
+        background: var(--accent-yellow);
+        margin-bottom: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="accent"></div>
+      <h1>Hello from PM</h1>
+      <p>FastAPI is serving this static page. Click below to call the health API.</p>
+      <button id="ping" type="button">Call /api/health</button>
+      <p id="result"></p>
+    </main>
+    <script>
+      document.getElementById("ping").addEventListener("click", async () => {
+        const result = document.getElementById("result");
+        result.textContent = "Calling...";
+        try {
+          const response = await fetch("/api/health");
+          const data = await response.json();
+          result.textContent = JSON.stringify(data);
+        } catch (error) {
+          result.textContent = String(error);
+        }
+      });
+    </script>
+  </body>
+</html>

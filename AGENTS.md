@@ -3,6 +3,7 @@
 ## Business Requirements
 
 This project is building a Project Management App. Key features:
+
 - A user can sign in
 - When signed in, the user sees a Kanban board representing their project
 - The Kanban board has fixed columns that can be renamed
@@ -23,8 +24,11 @@ For the MVP, this will run locally (in a docker container)
 - Python FastAPI backend, including serving the static NextJS site at /
 - Everything packaged into a Docker container
 - Use "uv" as the package manager for python in the Docker container
-- Use OpenRouter for the AI calls. An OPENROUTER_API_KEY is in .env in the project root
-- Use `openai/gpt-oss-120b` as the model
+- Use Cursor for the AI calls. An CURSOR_API_KEY is in .env in the project root
+- Use `composer-2.5` as the model
+- Kanban board stored as one JSON blob per user in SQLite
+- AI chat history is session-only in the browser (not persisted)
+- Backend uses Python `cursor-sdk`; model is instructed to return JSON and the backend parses it
 - Use SQLLite local database for the database, creating a new db if it doesn't exist
 - Start and Stop server scripts for Mac, PC, Linux in scripts/
 
